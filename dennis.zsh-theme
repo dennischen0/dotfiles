@@ -1,9 +1,8 @@
 # -----------------------------------------------------------------------------
-#          FILE: dogenpunk.zsh-theme
+#          FILE: dennis.zsh-theme
 #   DESCRIPTION: oh-my-zsh theme file.
-#        AUTHOR: Matthew Nelson (dogenpunk@gmail.com)
-#       VERSION: 0.1
-#    SCREENSHOT: coming soon
+#        AUTHOR: Dennis Chen
+#       VERSION: 0.2
 # -----------------------------------------------------------------------------
 
 MODE_INDICATOR="%{$fg_bold[red]%}❮%{$reset_color%}%{$fg[red]%}❮❮%{$reset_color%}"
@@ -11,7 +10,7 @@ local return_status="%{$fg[red]%}%(?..⏎)%{$reset_color%}"
 
 PROMPT='%{$fg[green]%}%n%{$reset_color%}@%{$fg[blue]%}%m%{$reset_color%}%{$fg_bold[white]%} %{$reset_color%}%{$fg[cyan]%}%~:%{$reset_color%}$(git_time_since_commit)$(git_prompt_info) $(prompt_char) '
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[green]%}git%{$reset_color%}@%{$fg[black]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[green]%}git%{$reset_color%}@%{$bg[white]%}%{$fg[black]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%})"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
@@ -28,7 +27,7 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ✭"
 function prompt_char() {
   git branch >/dev/null 2>/dev/null && echo "%{$fg[green]%}±%{$reset_color%}" && return
   hg root >/dev/null 2>/dev/null && echo "%{$fg_bold[red]%}☿%{$reset_color%}" && return
-  echo "%{$fg[cyan]%}⇒%{$reset_color%}"
+  echo "%{$fg[cyan]%}◯ %{$reset_color%}"
 }
 
 # Colors vary depending on time lapsed.
@@ -37,6 +36,8 @@ ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%{$fg[yellow]%}"
 ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%{$fg[red]%}"
 ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[cyan]%}"
 
+# Determine the time since last commit. If branch is clean,
+# use a neutral color, otherwise colors will vary according to time.
 function git_time_since_commit() {
     if git rev-parse --git-dir > /dev/null 2>&1; then
         # Only proceed if there is actually a commit.
